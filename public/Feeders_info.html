@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feeders Information</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .header {
+            background-color: white;
+            color: red;
+            text-decoration: underline 2px;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 0;
+            width: 100%;
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header img {
+            position: absolute;
+            top: 15px;
+            left: 25px;
+            width: 120px;
+            height: 100px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .navbar {
+            background-color: white;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 117px;
+            padding-top: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            position: absolute;
+            top: 0px;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: #6dc453;
+            text-align: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            margin-left: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background: #ffd000;
+            color: #fff;
+            border-radius: 40px;
+            font-weight: bold;
+        }
+
+        .navbar a:last-child {
+            margin-right: 10px;
+        }
+
+        .back-btn {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .back-btn:hover {
+            background-color: #555;
+        }
+
+        .logout-btn {
+            background-color: #f00;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background-color: #f22;
+        }
+
+        h2 {
+            color: #333;
+            text-decoration: underline;
+            font-size: 30px;
+            padding-top: 150px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 0 auto;
+            border: 1px solid #333;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table, th, td {
+            transition: all 0.3s ease;
+        }
+
+        table:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .btn {
+            background-color: #4caf50;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .feeder-header-400kv {
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            font-size: 25px;
+        }
+
+        .feeder-header-220kv {
+            background-color: #e74c3c;
+            color: white;
+            text-align: center;
+            font-size: 25px;
+        }
+
+        #searchBar {
+            margin-bottom: 10px;
+            padding: 8px;
+            width: 60%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <img src="logo_new.png" alt="Logo" class="logo" width="180px" height="160px">
+        <h1>𝐓𝐑𝐀𝐍𝐒𝐌𝐈𝐒𝐒𝐈𝐎𝐍 𝐂𝐎𝐑𝐏𝐎𝐑𝐀𝐓𝐈𝐎𝐍 𝐎𝐅 𝐓𝐄𝐋𝐀𝐍𝐆𝐀𝐍𝐀 𝐋𝐈𝐌𝐈𝐓𝐄𝐃</h1>
+    </div>
+
+    <!-- Navigation bar -->
+    <div class="navbar">
+        <a href="services.html" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+        <a href="#" class="logout-btn" onclick="logout(); return false;"><i class="fas fa-sign-out-alt"></i></a>
+    </div>
+
+    <h2>Feeders Information</h2>
+
+    <input type="text" id="searchBar" placeholder="Search for feeders..." onkeyup="searchTable()">
+
+    <table>
+        <thead>
+            <tr>
+                <th colspan="9" class="feeder-header-400kv">400KV FEEDER</th>
+            </tr>
+            <tr>
+                <th>S. No</th>
+                <th>Name of the Circle</th>
+                <th>Name of the EHT Lines</th>
+                <th>Date of Commissioning</th>
+                <th>Length of Line CKM</th>
+                <th>Type of Conductor</th>
+                <th colspan="3">Type of Lines</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>SC</th>
+                <th>DC</th>
+                <th>DS/SC</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Add 16 rows of data here -->
+            <!-- Example: -->
+            <tr>
+                <td>1</td>
+                <td>-</td>
+                <td>400KV Shankarpally-Mamidipally</td>
+                <td>31-oct-2015 @17:55Hrs</td>
+                <td>96.81</td>
+                <td>Twin Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td></td>
+                <td>400KV Shankarpally-Srisailam</td>
+                <td>31-oct-2015 @18:51Hrs</td>
+                <td>207.51</td>
+                <td>Twin Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td></td>
+                <td>400KV Shankarpally-Dindi</td>
+                <td>21-Apr-2017 @18:10Hrs</td>
+                <td>134</td>
+                <td>Twin Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td></td>
+                <td>400KV Shankarpally-Gajwel-1</td>
+                <td>18-Nov-2012 @13:47Hrs</td>
+                <td>105</td>
+                <td>Twin Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td></td>
+                <td>400KV Shankarpally-Gajwel-2</td>
+                <td>18-Nov-2012 @15:25Hrs</td>
+                <td>105</td>
+                <td>Twin Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td></td>
+                <td>400KV Shankarpally-Suryapet-1</td>
+                <td>06-Feb-2017 @12:01Hrs</td>
+                <td>231</td>
+                <td>Quad Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td></td>
+                <td>400KV Shankarpally-Suryapet-2</td>
+                <td>06-Feb-2017 @12:10Hrs</td>
+                <td>231</td>
+                <td>quad Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td></td>
+                <td>400KV Shankarpally-Maheshwaram-1</td>
+                <td>09-Jun-2017 @16:11 Hrs</td>
+                <td>84.13</td>
+                <td>Twin Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td></td>
+                <td>400KV Shankarpally-Maheshwaram-2</td>
+                <td>09-Jun-2017 @17:48 Hrs</td>
+                <td>84.13</td>
+                <td>Twin Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td></td>
+                <td>400KV Shankarpally-Narsapur-1</td>
+                <td>01-Mar-2017 @15:34 Hrs</td>
+                <td>60.92</td>
+                <td>Twin Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td></td>
+                <td>400KV Shankarpally-Narsapur-2</td>
+                <td>15-Nov-2018 @19:02Hrs</td>
+                <td>60.92</td>
+                <td>Twin Moose</td>
+                <td>- </td>
+                <td>DC</td>
+                <td>-s</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td></td>
+                <td>400KV Shankarpally-Kethireddypally-1</td>
+                <td>14-Nov-2018 @10:25Hrs</td>
+                <td>51.13</td>
+                <td>Quad Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td></td>
+                <td>400KV Shankarpally-Kethireddypally-2</td>
+                <td>22-Feb-2019 @17:06Hrs</td>
+                <td>51.13</td>
+                <td>Quad Moose</td>
+                <td>- </td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td></td>
+                <td>400KV Shankarpally-Nizamabad-1</td>
+                <td>13-oct-2017 @16:44Hrs</td>
+                <td>139</td>
+                <td>Twin Moose</td>
+                <td>Yes</td>
+                <td>No</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td></td>
+                <td>400KV Shankarpally-Nizamabad-2</td>
+                <td>13-oct-2017 @17:11Hrs</td>
+                <td>139</td>
+                <td>Twin Moose</td>
+                <td>- </td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            
+            <!-- Repeat similar rows for a total of 16 rows -->
+        </tbody>
+    </table>
+    
+
+    <table>
+        <thead>
+            <tr>
+                <th colspan="9" class="feeder-header-220kv">220KV FEEDER</th>
+            </tr>
+            <tr>
+                <th>S. No</th>
+                <th>Name of the Circle</th>
+                <th>Name of the EHT Lines</th>
+                <th>Date of Commissioning</th>
+                <th>Length of Line CKM</th>
+                <th>Type of Conductor</th>
+                <th colspan="3">Type of Lines</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>SC</th>
+                <th>DC</th>
+                <th>DS/SC</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Add 11 rows of data here -->
+            <!-- Example: -->
+            <tr>
+                <td>1</td>
+                <td></td>
+                <td>220KV Shankarpally-Parigi-1</td>
+                <td>31-Dec-2015 @15:35Hrs</td>
+                <td>44.93</td>
+                <td>single Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td></td>
+                <td>220KV Shankarpally-Parigi-2</td>
+                <td>31-Dec-2015 @15:39Hrs</td>
+                <td>44.93</td>
+                <td>single Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td></td>
+                <td>220KV Shankarpally-Tandur</td>
+                <td>14-Mar-2014 @ 21:40Hrs</td>
+                <td>85.057</td>
+                <td>single Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td></td>
+                <td>220KV Shankarpally-Gachibowli-1</td>
+                <td>14-Mar-2014 @ 21:30Hrs</td>
+                <td>28.5</td>
+                <td>single Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td></td>
+                <td>220KV Shankarpally-Gachibowli-2</td>
+                <td>07-Feb-2016 @ 21:16Hrs</td>
+                <td>23.5</td>
+                <td>single Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td></td>
+                <td>220KV Shankarpally-ShadNagar</td>
+                <td>07-Mar-2014 @ 19:37Hrs</td>
+                <td>48.5</td>
+                <td>single Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td></td>
+                <td>220KV Shankarpally-kethireddypally</td>
+                <td>14-Nov-2018 @ 21:41Hrs</td>
+                <td>29.44</td>
+                <td>single Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td></td>
+                <td>220KV Shankarpally-Yeddumailaram-1</td>
+                <td>07-Mar-2014 @ 20:19Hrs</td>
+                <td>9.5</td>
+                <td>single Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td></td>
+                <td>220KV Shankarpally-Yeddumailaram-2</td>
+                <td>07-Feb-2013 @ 21:05Hrs</td>
+                <td>9.5</td>
+                <td>single Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td></td>
+                <td>220KV Shankarpally-Sadasivapet-1</td>
+                <td>29-Mar-2014 @ 14:48Hrs</td>
+                <td>39</td>
+                <td>single Moose</td>
+                <td>-</td>
+                <td>DC</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td></td>
+                <td>220KV Shankarpally-Sadasivapet-2</td>
+                <td>29-Mar-2014 @ 15:23Hrs</td>
+                <td>39</td>
+                <td>single Moose</td>
+                <td>- </td>
+                <td>DC</td>
+                <td>-</td>
+            </tr>
+            <!-- Repeat similar rows for a total of 11 rows -->
+        </tbody>
+    </table>
+
+    <script>
+        // JavaScript function to handle table search
+        function searchTable() {
+            // Declare variables
+            var input, filter, tables, tbody, tr, td, i, j, txtValue;
+            input = document.getElementById("searchBar");
+            filter = input.value.toUpperCase();
+            tables = document.querySelectorAll("table");
+
+            // Loop through all tables
+            tables.forEach(table => {
+                tbody = table.querySelector("tbody");
+                tr = tbody.getElementsByTagName("tr");
+
+                // Loop through all table rows
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td");
+                    let matchFound = false;
+
+                    // Loop through all columns in the current row
+                    for (j = 0; j < td.length; j++) {
+                        if (td[j]) {
+                            txtValue = td[j].textContent || td[j].innerText;
+
+                            // Check if the current column contains the search query
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                matchFound = true;
+                                break; // Break the inner loop if a match is found
+                            }
+                        }
+                    }
+
+                    // Show or hide the row based on the match
+                    tr[i].style.display = matchFound ? "" : "none";
+                }
+            });
+        }
+
+        function logout() {
+            if (confirm("Are you sure you want to logout?")) {
+                localStorage.removeItem('token'); // Clear the token from localStorage or sessionStorage
+                sessionStorage.clear(); // Clear any session-specific data
+                window.location.href = 'https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/'; // Redirect to login page
+            }
+        }
+
+        function preventBack() {
+            window.history.forward();
+        }
+
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null};
+
+    </script>
+
+</body>
+</html>
