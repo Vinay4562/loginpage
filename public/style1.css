@@ -1,0 +1,230 @@
+﻿.body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+/* Header styles */
+.header {
+    background-color: white;
+    padding: 20px 0;
+    color: red;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 0;
+}
+
+.header img {
+    position: absolute; /* Position the image */
+    top: 15px; /* Align the image to the top */
+    left: 25px; /* Align the image to the left */
+    width: 140px;
+    height: 120px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 30px;
+    color: red;
+}
+
+/* Updated navbar styles */
+.navbar {
+    background-color: white;
+    overflow: hidden;
+    display: flex;
+    justify-content: right; /* Align items to the start and end */
+    align-items: center;
+    font-weight: bold;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+    padding-top: 5px;
+}
+
+.navbar a {
+    color: white;
+    text-align: center;
+    padding: 10px 15px;
+    text-decoration: none;
+    margin-left: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.navbar a:hover {
+    background: #ffd000;
+    color: red;
+    border-radius: 40px;
+    font-weight: bold;
+}
+
+.navbar a:last-child {
+    margin-right: 10px; /* Add margin to separate buttons */
+}
+
+/* Logout button styles */
+.logout-btn {
+    background-color: #f00;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.logout-btn:hover {
+    background-color: #f22;
+}
+
+.container{
+    min-height: 100vh;
+    width: 100%;
+    background-color: transparent;
+}
+
+.service-wrapper{
+    padding: 5% 8%;
+}
+
+
+.service{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1{
+    color: red;
+    font-size: 2rem;
+    position: relative;
+    margin-top: 0px;
+    padding-top: 5px;
+}
+
+h1::after{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 6%;
+    height: 8px;
+    width: 90%;
+    border-radius: 8px;
+    background-color: rgba(255,255,255,0.05);
+}
+
+h1 span{
+    position: absolute;
+    top: 100%;
+    left: 6%;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: #09e629;
+    animation: anim 3s linear infinite;
+}
+
+@keyframes anim {
+    95%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0%;
+        left: 90%;
+    }
+}
+
+.cards{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 60px;
+    margin-top: 10px;
+}
+
+.card{
+    height: 250px;
+    width: 250px;
+    background-color: #2fbce7;
+    padding: 5% 8%;
+    border: 0.2px solid rgb(114,226,0.2);
+    border-radius: 8px;
+    transition: .6s;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:after{
+    content: "";
+    position: absolute;
+    top: 150%;
+    left: -200px;
+    width: 120%;
+    transform: rotate(50deg);
+    background-color: #fc6c6c;
+    height: 18px;
+    filter: blur(30px);
+    opacity: 0.5;
+    transition: 1s;
+}
+
+.card:hover:after{
+    width: 225%;
+    top: -100%;
+}
+
+.card i{
+    color: #ec1a1a;
+    margin-top: 60px;
+    margin-bottom: 10px;
+    font-size: 4.3rem;
+}
+
+.card h2{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.card p{
+    text-align: center;
+    width: 100%;
+    margin: 12px 0;
+    color: #fff;
+}
+
+.card:hover{
+    background-color: transparent;
+    transform: translateY(-8px);
+    border-color: #00ff37;
+    cursor: pointer;
+}
+
+.card:hover i{
+    color: #00ff37;
+}
+
+.card:hover h2{
+    color: black;
+}
+
+.card:hover p{
+    color: black;
+}
+
+@media screen and (max-width:1200px) {
+    .cards{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media screen and (max-width:900px) {
+    .cards {
+        grid-template-columns: repeat(1,1fr);
+    }
+    h1{
+        font-size: 3.5rem;
+    }
+}
