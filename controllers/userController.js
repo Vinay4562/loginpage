@@ -54,6 +54,15 @@ const register = async (req, res) => {
   }
 };
 
+const generateToken = (payload) => {
+  return new Promise((resolve, reject) => {
+    jwt.sign(payload, secret, { expiresIn: '1h' }, (err, token) => {
+      if (err) reject(err);
+      resolve(token);
+    });
+  });
+};
+
 const login = async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -116,4 +125,5 @@ module.exports = {
   register,
   login,
   forgotPassword,
+  generateToken
 };
