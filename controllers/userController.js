@@ -54,15 +54,6 @@ const register = async (req, res) => {
   }
 };
 
-const generateToken = (payload) => {
-  return new Promise((resolve, reject) => {
-    jwt.sign(payload, secret, { expiresIn: '1h' }, (err, token) => {
-      if (err) reject(err);
-      resolve(token);
-    });
-  });
-};
-
 const login = async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -87,10 +78,7 @@ const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '1h' },
       (err, token) => {
-        if (err) {
-          console.error('Error signing JWT:', err);
-          throw err; // Properly handle error if JWT signing fails
-        }
+        if (err) throw err;
         res.json({ token });
       }
     );
@@ -100,6 +88,7 @@ const login = async (req, res) => {
     res.status(500).json({ msg: 'Login failed. Please try again later.' });
   }
 };
+
 
 const forgotPassword = async (req, res) => {
   const { username, email } = req.body;
@@ -127,5 +116,4 @@ module.exports = {
   register,
   login,
   forgotPassword,
-  generateToken
 };
