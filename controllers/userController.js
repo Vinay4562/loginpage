@@ -54,24 +54,19 @@ const register = async (req, res) => {
   }
 };
 
-
 const login = async (req, res) => {
   const { username, password } = req.body;
-
   try {
-    // Check if user exists
     let user = await User.findOne({ username });
     if (!user) {
       return res.status(400).json({ msg: 'Invalid Credentials' });
     }
 
-    // Check password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ msg: 'Invalid Credentials' });
     }
 
-    // Create JWT token
     const payload = {
       user: {
         id: user.id,
@@ -90,9 +85,10 @@ const login = async (req, res) => {
 
   } catch (err) {
     console.error('Error during login:', err.message);
-    res.status(500).json({ msg: 'Server error' });
+    res.status(500).json({ msg: 'Login failed. Please try again later.' });
   }
 };
+
 
 const forgotPassword = async (req, res) => {
   const { username, email } = req.body;
