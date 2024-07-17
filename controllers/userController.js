@@ -1,6 +1,15 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
 
 const register = async (req, res) => {
   const { username, password, confirmPassword, email } = req.body;
@@ -89,7 +98,32 @@ const forgotPassword = async (req, res) => {
       return res.status(400).json({ msg: 'Invalid Credentials' });
     }
 
-    res.status(200).json({ msg: 'Password reset link has been sent to your email' });
+    // Generate a unique reset token (could use something like crypto.randomBytes)
+    const resetToken = crypto.randomBytes(20).toString('hex');
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = Date.now() + 3600000; // Token expires in 1 hour
+
+    await user.save();
+
+    // Send reset link via email
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: user.email,
+      subject: 'Password Reset Request',
+      text: `You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n
+        Please click on the following link, or paste this into your browser to complete the process:\n\n
+        ${process.env.CLIENT_URL}/reset/${resetToken}\n\n
+        If you did not request this, please ignore this email and your password will remain unchanged.\n`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ msg: 'Error sending reset email' });
+      }
+      console.log('Reset email sent: ' + info.response);
+      res.status(200).json({ msg: 'Password reset link has been sent to your email' });
+    });
   } catch (err) {
     console.error('Error during forgot password:', err.message);
     res.status(500).send('Server error');
