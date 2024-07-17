@@ -87,7 +87,10 @@ const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '1h' },
       (err, token) => {
-        if (err) throw err;
+        if (err) {
+          console.error('Error signing JWT:', err);
+          throw err; // Properly handle error if JWT signing fails
+        }
         res.json({ token });
       }
     );
@@ -97,7 +100,6 @@ const login = async (req, res) => {
     res.status(500).json({ msg: 'Login failed. Please try again later.' });
   }
 };
-
 
 const forgotPassword = async (req, res) => {
   const { username, email } = req.body;
