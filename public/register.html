@@ -9,7 +9,7 @@
 <body>
   <div class="container">
     <h2>Register</h2>
-    <form action="https://loginpage-mocha.vercel.app/api/users/register" method="POST">
+    <form id="registrationForm">
       <input type="text" name="username" placeholder="Username" required>
       <input type="password" name="password" placeholder="Password" required>
       <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
@@ -18,10 +18,11 @@
       <a href="index.html">Login</a>
     </form>
     <p id="registrationMessage" style="display: none; color: green;">User successfully registered!</p>
+    <p id="errorMessage" style="display: none; color: red;"></p>
   </div>
 
   <script>
-    document.querySelector('form').addEventListener('submit', async (e) => {
+    document.getElementById('registrationForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const formData = {
@@ -32,7 +33,7 @@
       };
   
       try {
-        const response = await fetch('https://loginpage-mocha.vercel.app/api/users/register', {
+        const response = await fetch('https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/api/users/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -40,17 +41,19 @@
           body: JSON.stringify(formData)
         });
   
+        const result = await response.json();
+        
         if (!response.ok) {
-          throw new Error('Registration failed. Please try again later.');
+          throw new Error(result.msg || 'Registration failed. Please try again later.');
         }
   
-        // Show success message
         document.getElementById('registrationMessage').style.display = 'block';
+        document.getElementById('errorMessage').style.display = 'none';
         
       } catch (error) {
         console.error('Error during registration:', error.message);
-        // Handle error: display message to user or retry
-        alert('Registration failed. Please try again later.');
+        document.getElementById('errorMessage').textContent = error.message;
+        document.getElementById('errorMessage').style.display = 'block';
       }
     });
   </script>
