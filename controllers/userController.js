@@ -44,7 +44,7 @@ const register = async (req, res) => {
       { expiresIn: '1h' },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.status(201).json({ msg: 'User registered successfully', token });
       }
     );
 
@@ -53,6 +53,7 @@ const register = async (req, res) => {
     res.status(500).json({ msg: 'Server error' });
   }
 };
+
 
 const login = async (req, res) => {
   const { username, password } = req.body;
