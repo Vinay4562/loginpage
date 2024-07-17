@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
 
 dotenv.config();
@@ -8,6 +9,9 @@ dotenv.config();
 const app = express();
 
 // Middleware
+app.use(cors({
+  origin: 'https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app' // or use '*' to allow all origins
+}));
 app.use(express.json());
 
 // Database connection
