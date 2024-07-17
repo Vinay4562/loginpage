@@ -9,7 +9,7 @@
 <body>
   <div class="container">
     <h2>Register</h2>
-    <form id="registrationForm">
+    <form id="registrationForm" action="https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/api/users/login" method="POST"></form>>
       <input type="text" name="username" placeholder="Username" required>
       <input type="password" name="password" placeholder="Password" required>
       <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
@@ -33,7 +33,7 @@
       };
   
       try {
-        const response = await fetch('https://400kvssshankarpally.free.nf/api/users/register', {
+        const response = await fetch('https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/api/users/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
