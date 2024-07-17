@@ -3,15 +3,15 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require('path'); // Node.js path module
-const userRoutes = require('./routes/userRoutes');
+const userRoutes = require('./routes/userRoutes'); // Assuming userRoutes is correctly defined
 
 dotenv.config();
 
 const app = express();
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(cors()); // Enable CORS for all routes
+app.use(express.json()); // Parse JSON bodies
 
 // Serve static files from the 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -30,7 +30,7 @@ mongoose.connect(mongoUri, {
 .catch((err) => console.error('MongoDB connection error:', err));
 
 // Routes
-app.use('/api/users', userRoutes);
+app.use('/api/users', userRoutes); // Mount userRoutes under '/api/users'
 
 // Error handling middleware (optional, for improved error handling)
 app.use((err, req, res, next) => {
@@ -39,7 +39,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // Use PORT environment variable or default to 3000
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
