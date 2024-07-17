@@ -2,16 +2,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const path = require('path'); // Node.js path module
-const userRoutes = require('./routes/userRoutes'); // Assuming userRoutes is correctly defined
+const path = require('path');
+const { register, login, forgotPassword } = require('./controllers/userController');
 
 dotenv.config();
 
 const app = express();
 
 // Middleware
-app.use(cors()); // Enable CORS for all routes
-app.use(express.json()); // Parse JSON bodies
+app.use(cors());
+app.use(express.json());
 
 // Serve static files from the 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -30,16 +30,18 @@ mongoose.connect(mongoUri, {
 .catch((err) => console.error('MongoDB connection error:', err));
 
 // Routes
-app.use('/api/users', userRoutes); // Mount userRoutes under '/api/users'
+app.post('/api/users/register', register);
+app.post('/api/users/login', login);
+app.post('/api/users/forgot-password', forgotPassword);
 
-// Error handling middleware (optional, for improved error handling)
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send('Something broke!');
+  res.status(500).json({ msg: 'Server error' });
 });
 
 // Start the server
-const PORT = process.env.PORT || 3000; // Use PORT environment variable or default to 3000
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
