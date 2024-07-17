@@ -1,11 +1,11 @@
 {
     "routes": [
       {
-        "src": "/(.*)",
+        "src": "/",
         "dest": "/"
       },
       {
-        "src": "app.js",
+        "src": "/test",
         "use": "/"
       }
     ]
