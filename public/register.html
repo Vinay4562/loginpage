@@ -41,10 +41,12 @@
           body: JSON.stringify(formData)
         });
   
-        const result = await response.json();
+        const result = await response.json().catch(() => {
+          return response.text();
+        });
         
         if (!response.ok) {
-          throw new Error(result.msg || 'Registration failed. Please try again later.');
+          throw new Error(result.msg || result || 'Registration failed. Please try again later.');
         }
   
         document.getElementById('registrationMessage').style.display = 'block';
