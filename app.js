@@ -12,7 +12,7 @@ const app = express();
 // Middleware
 app.use(cors({
   origin: 'https://loginpage-c4ccf1gvd-vinay-kumars-projects-f1559f4a.vercel.app',
-  methods: ['GET'],
+  methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express.json());
