@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style1.css">
     <script src="https://kit.fontawesome.com/689a7f2c38.js" crossorigin="anonymous"></script>
-
 </head>
 <body>
 
@@ -18,7 +16,7 @@
 
     <!-- Navigation bar -->
     <div class="navbar">
-        <a href="#" class="logout-btn" onclick="logout(); return false;"><i class="fas fa-sign-out-alt"></i></a>
+        <a href="#" class="logout-btn" onclick="logout(); return false;"><i class="fas fa-sign-out-alt"></i>LogOut</a>
     </div>    
 
     <div class="container">
@@ -40,7 +38,7 @@
                         <h2>Feeders Information</h2>
                         <p>All 400KV&220KV</p>
                     </div>
-                    <div class="card">
+                    <div class="card" onclick="goToEquipmentDetails()">
                         <i class="fa-solid fa-network-wired"></i>
                         <h2>Equipment Details</h2>
                         <p>Name plate Details</p>
@@ -50,33 +48,28 @@
                         <h2>Complaint Register</h2>
                         <p>Office problems</p>
                     </div>
-                    <div class="card">
+                    <div class="card" onclick="goToEquipmentSparesData()">
                         <i class="fa-solid fa-screwdriver-wrench"></i>
                         <h2>Spares</h2>
                         <p>Equipment Spares Data</p>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <script>
-
         document.addEventListener('DOMContentLoaded', function() {
             // Check if the user is logged in
             if (sessionStorage.getItem('loggedIn') !== 'true') {
-            // If not logged in, redirect to the login page
-            window.location.href = 'https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/';
+                // If not logged in, redirect to the login page
+                window.location.href = 'https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/';
             }
         });        
 
         function logout() {
             if (confirm("Are you sure you want to logout?")) {
-                sessionStorage.removeItem('loggedIn'); // Clear the token from localStorage
+                sessionStorage.removeItem('loggedIn'); // Clear the token from sessionStorage
                 window.location.href = 'https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/';
             }
         }
@@ -92,8 +85,17 @@
         function goToComplaintRegister() {
             window.location.href = 'https://complaint-register-git-main-vinay-kumars-projects-f1559f4a.vercel.app/complaints.html';
         }
+
         function goToFeederinfo() {
             window.location.href = 'Feeders_info.html';
+        }
+
+        function goToEquipmentDetails() {
+            window.location.href = 'underConstruction.html';
+        }
+
+        function goToEquipmentSparesData() {
+            window.location.href = 'underConstruction.html';
         }
 
         function preventBack() {
@@ -101,8 +103,7 @@
         }
 
         setTimeout("preventBack()", 0);
-        window.onunload = function () { null};
-        
+        window.onunload = function () { null };
     </script>
 </body>
 </html>
