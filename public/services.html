@@ -59,6 +59,20 @@
     </div>
 
     <script>
+        // Function to check if the user is logged in
+        function checkAuth() {
+            // Replace with actual authentication check logic
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+            if (!isLoggedIn) {
+                window.location.href = 'https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/';
+            }
+        }
+
+        // Check authentication on page load
+        checkAuth();
+    </script>
+
+    <script>
         // Check for token in localStorage
         document.addEventListener('DOMContentLoaded', () => {
             const token = localStorage.getItem('token');
