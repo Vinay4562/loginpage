@@ -43,7 +43,10 @@
         const data = await response.json();
         console.log('Login successful:', data);
 
-        // Redirect to success page upon successful login
+        // Store the token in localStorage
+        localStorage.setItem('authToken', data.token);
+
+        // Redirect to services page upon successful login
         window.location.href = 'services.html';
 
       } catch (error) {

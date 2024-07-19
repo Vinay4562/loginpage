@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-    <title>Login</title>
+    <title>Services</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style1.css">
     <script src="https://kit.fontawesome.com/689a7f2c38.js" crossorigin="anonymous"></script>
-
 </head>
 <body>
 
@@ -38,7 +36,7 @@
                     <div class="card" onclick="goToFeederinfo()">
                         <i class="fa-solid fa-sitemap"></i>
                         <h2>Feeders Information</h2>
-                        <p>All 400KV&220KV</p>
+                        <p>All 400KV & 220KV</p>
                     </div>
                     <div class="card">
                         <i class="fa-solid fa-network-wired"></i>
@@ -55,16 +53,20 @@
                         <h2>Spares</h2>
                         <p>Equipment Spares Data</p>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <script>
+        // Check for token in localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/';
+            }
+        });
+
         function logout() {
             if (confirm("Are you sure you want to logout?")) {
                 localStorage.removeItem('token'); // Clear the token from localStorage
@@ -83,6 +85,7 @@
         function goToComplaintRegister() {
             window.location.href = 'https://complaint-register-git-main-vinay-kumars-projects-f1559f4a.vercel.app/complaints.html';
         }
+
         function goToFeederinfo() {
             window.location.href = 'Feeders_info.html';
         }
@@ -92,7 +95,7 @@
         }
 
         setTimeout("preventBack()", 0);
-        window.onunload = function () { null};
+        window.onunload = function () { null };
         
     </script>
 </body>
