@@ -77,7 +77,7 @@
 
         function logout() {
             if (confirm("Are you sure you want to logout?")) {
-                localStorage.removeItem('token'); // Clear the token from localStorage
+                sessionStorage.removeItem('loggedIn'); // Clear the token from localStorage
                 window.location.href = 'https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/';
             }
         }
