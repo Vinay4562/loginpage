@@ -65,19 +65,17 @@
         function checkAuth() {
             const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
             if (!isLoggedIn) {
-                window.location.href = 'login.html'; // Redirect to the login page if not logged in
+                window.location.replace('https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/'); // Use replace to prevent going back to this page
             }
         }
 
         // Check authentication on page load
         checkAuth();
-    </script>
 
-    <script>
         function logout() {
             if (confirm("Are you sure you want to logout?")) {
                 sessionStorage.removeItem('isLoggedIn'); // Clear the session storage item
-                window.location.href = 'login.html'; // Redirect to the login page
+                window.location.replace('https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/'); // Use replace to prevent going back to this page
             }
         }
 
@@ -102,7 +100,6 @@
         }
 
         setTimeout(preventBack, 0);
-        window.onunload = function () { null }; // This line might still prevent back navigation but can be adjusted if it creates issues
     </script>
 </body>
 </html>
