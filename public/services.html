@@ -65,6 +65,16 @@
     </div>
 
     <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if the user is logged in
+            if (sessionStorage.getItem('loggedIn') !== 'true') {
+            // If not logged in, redirect to the login page
+            window.location.href = 'https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/';
+            }
+        });
+        
+
         function logout() {
             if (confirm("Are you sure you want to logout?")) {
                 localStorage.removeItem('token'); // Clear the token from localStorage
