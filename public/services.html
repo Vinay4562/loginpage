@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Services</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Transmission Corporation of Telangana Limited Services Page">
+    <title>Services</title>
     <link rel="stylesheet" href="style1.css">
     <script src="https://kit.fontawesome.com/689a7f2c38.js" crossorigin="anonymous"></script>
 </head>
@@ -10,7 +12,7 @@
 
     <!-- Header -->
     <div class="header">
-        <img src="logo_new.png" alt="Logo" class="logo" width="180px" height="160px">
+        <img src="logo_new.png" alt="Logo" class="logo" width="180" height="160">
         <h1>TRANSMISSION CORPORATION OF TELANGANA LIMITED</h1>
     </div>
 
@@ -61,10 +63,9 @@
     <script>
         // Function to check if the user is logged in
         function checkAuth() {
-            // Replace with actual authentication check logic
             const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
             if (!isLoggedIn) {
-                window.location.href = 'https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/';
+                window.location.href = 'login.html'; // Redirect to the login page if not logged in
             }
         }
 
@@ -75,11 +76,11 @@
     <script>
         function logout() {
             if (confirm("Are you sure you want to logout?")) {
-                localStorage.removeItem('token'); // Clear the token from localStorage
-                window.location.href = 'https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/';
+                sessionStorage.removeItem('isLoggedIn'); // Clear the session storage item
+                window.location.href = 'login.html'; // Redirect to the login page
             }
         }
-        
+
         function goToMaxmin() {
             window.location.href = 'https://maxregister-git-main-vinay-kumars-projects-f1559f4a.vercel.app/Dataupload.html';
         }
@@ -100,9 +101,8 @@
             window.history.forward();
         }
 
-        setTimeout("preventBack()", 0);
-        window.onunload = function () { null };
-        
+        setTimeout(preventBack, 0);
+        window.onunload = function () { null }; // This line might still prevent back navigation but can be adjusted if it creates issues
     </script>
 </body>
 </html>
