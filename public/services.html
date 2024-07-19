@@ -1,18 +1,18 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Transmission Corporation of Telangana Limited Services Page">
-    <title>Services</title>
     <link rel="stylesheet" href="style1.css">
     <script src="https://kit.fontawesome.com/689a7f2c38.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
     <!-- Header -->
     <div class="header">
-        <img src="logo_new.png" alt="Logo" class="logo" width="180" height="160">
+        <img src="logo_new.png" alt="Logo" class="logo" width="180px" height="160px">
         <h1>TRANSMISSION CORPORATION OF TELANGANA LIMITED</h1>
     </div>
 
@@ -38,7 +38,7 @@
                     <div class="card" onclick="goToFeederinfo()">
                         <i class="fa-solid fa-sitemap"></i>
                         <h2>Feeders Information</h2>
-                        <p>All 400KV & 220KV</p>
+                        <p>All 400KV&220KV</p>
                     </div>
                     <div class="card">
                         <i class="fa-solid fa-network-wired"></i>
@@ -55,28 +55,23 @@
                         <h2>Spares</h2>
                         <p>Equipment Spares Data</p>
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
 
     <script>
-        // Function to check if the user is logged in
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if the user is logged in
-            if (sessionStorage.getItem('loggedIn') !== 'true') {
-            // If not logged in, redirect to the login page
-            window.location.href = 'index.html';
-            }
-        });
-
         function logout() {
             if (confirm("Are you sure you want to logout?")) {
-                sessionStorage.removeItem('isLoggedIn'); // Clear the session storage item
-                window.location.replace('index.html'); // Use replace to prevent going back to this page
+                localStorage.removeItem('token'); // Clear the token from localStorage
+                window.location.href = 'https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/';
             }
         }
-
+        
         function goToMaxmin() {
             window.location.href = 'https://maxregister-git-main-vinay-kumars-projects-f1559f4a.vercel.app/Dataupload.html';
         }
@@ -88,7 +83,6 @@
         function goToComplaintRegister() {
             window.location.href = 'https://complaint-register-git-main-vinay-kumars-projects-f1559f4a.vercel.app/complaints.html';
         }
-
         function goToFeederinfo() {
             window.location.href = 'Feeders_info.html';
         }
@@ -97,6 +91,9 @@
             window.history.forward();
         }
 
-   </script>
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null};
+        
+    </script>
 </body>
 </html>
