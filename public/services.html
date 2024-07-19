@@ -65,7 +65,7 @@
         function checkAuth() {
             const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
             if (!isLoggedIn) {
-                window.location.replace('https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/'); // Use replace to prevent going back to this page
+                window.location.replace('index.html'); // Use replace to prevent going back to this page
             }
         }
 
@@ -75,7 +75,7 @@
         function logout() {
             if (confirm("Are you sure you want to logout?")) {
                 sessionStorage.removeItem('isLoggedIn'); // Clear the session storage item
-                window.location.replace('https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/'); // Use replace to prevent going back to this page
+                window.location.replace('index.html'); // Use replace to prevent going back to this page
             }
         }
 
