@@ -73,14 +73,6 @@
     </script>
 
     <script>
-        // Check for token in localStorage
-        document.addEventListener('DOMContentLoaded', () => {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                window.location.href = 'https://loginpage-git-main-vinay-kumars-projects-f1559f4a.vercel.app/';
-            }
-        });
-
         function logout() {
             if (confirm("Are you sure you want to logout?")) {
                 localStorage.removeItem('token'); // Clear the token from localStorage
